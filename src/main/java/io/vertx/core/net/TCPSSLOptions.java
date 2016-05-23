@@ -65,9 +65,9 @@ public abstract class TCPSSLOptions extends NetworkOptions {
    */
   public static final boolean DEFAULT_USE_ALPN = false;
 
-   /**
-    * Default SSL engine = JDK
-    */
+  /**
+   * Default SSL engine = JDK
+   */
   public static final SSLEngine DEFAULT_SSL_ENGINE = SSLEngine.JDK;
 
 
@@ -267,6 +267,16 @@ public abstract class TCPSSLOptions extends NetworkOptions {
   }
 
   /**
+   * Set the key/cert options in generic format.
+   * @param options the key store in generic format
+   * @return a reference to this, so the API can be used fluently
+   */
+  public TCPSSLOptions setKeyCertOptions(KeyCertOptions options) {
+    this.keyCertOptions = options;
+    return this;
+  }
+
+  /**
    * Set the key/cert options in jks format, aka Java keystore.
    * @param options the key store in jks format
    * @return a reference to this, so the API can be used fluently
@@ -301,6 +311,16 @@ public abstract class TCPSSLOptions extends NetworkOptions {
    */
   public TrustOptions getTrustOptions() {
     return trustOptions;
+  }
+
+  /**
+   * Set the trust options in generic format
+   * @param options the options in generic format
+   * @return a reference to this, so the API can be used fluently
+   */
+  public TCPSSLOptions setTrustOptions(TrustOptions options) {
+    this.trustOptions = options;
+    return this;
   }
 
   /**
@@ -492,7 +512,7 @@ public abstract class TCPSSLOptions extends NetworkOptions {
     result = 31 * result + (useAlpn ? 1 : 0);
     result = 31 * result + (sslEngine != null ? sslEngine.hashCode() : 0);
     result = 31 * result + (enabledSecureTransportProtocols != null ? enabledSecureTransportProtocols
-        .hashCode() : 0);
+            .hashCode() : 0);
     return result;
   }
 }
